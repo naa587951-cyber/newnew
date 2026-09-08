@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Page Not Found - AllMods</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { background-color: #090a12; color: #e2e8f0; font-family: 'Plus Jakarta Sans', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 16px; text-align: center; }
+    .not-found-card { background: #121524; border: 1px solid #1e2540; border-radius: 20px; padding: 32px 24px; max-width: 400px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    h1 { font-family: 'Chakra Petch', sans-serif; font-size: 32px; color: #ffffff; margin: 0 0 8px; }
+    p { font-size: 14px; color: #94a3b8; margin: 0 0 20px; line-height: 1.5; }
+    .home-btn { display: inline-block; padding: 12px 24px; background: linear-gradient(90deg, #9333ea, #6366f1); color: #ffffff; text-decoration: none; font-weight: 700; border-radius: 12px; text-transform: uppercase; font-size: 13px; letter-spacing: 0.5px; }
+  </style>
+  <script>
+    // If arriving at a subpath on GitHub Pages, redirect to root
+    setTimeout(function() {
+      if (!window.location.pathname.endsWith('404.html')) {
+        window.location.replace('./index.html');
+      }
+    }, 3000);
+  </script>
+</head>
+<body>
+  <div class="not-found-card">
+    <div style="font-size: 40px; margin-bottom: 8px;">🎮</div>
+    <h1>404 - Mod Vault</h1>
+    <p>The requested mod page was not found or has moved.</p>
+    <a href="./index.html" class="home-btn">Return to AllMods Home</a>
+  </div>
+</body>
+</html>

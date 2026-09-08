@@ -332,12 +332,3 @@ function switchLegalTab(tab) {
     content.style.display = content.id === `modal-content-${tab}` ? "block" : "none";
   });
 }
-
-// Ensure global accessibility for inline onclick handlers
-if (typeof window !== "undefined") {
-  window.handleDownload = handleDownload;
-  window.trackGameClick = trackGameClick;
-  window.openLegalModal = openLegalModal;
-  window.closeLegalModal = closeLegalModal;
-  window.switchLegalTab = switchLegalTab;
-}
