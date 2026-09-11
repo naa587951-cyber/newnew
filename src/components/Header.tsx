@@ -18,7 +18,7 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   return (
     <header id="main-header" className="sticky top-0 z-40 w-full bg-white border-b border-gray-200/90 shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
-      <div className="max-w-4xl mx-auto px-4 pt-3 pb-0">
+      <div className={`max-w-4xl mx-auto px-4 pt-3 ${searchQuery.trim() ? 'pb-3' : 'pb-0'}`}>
         {/* Top bar: Brand + Search (on desktop) */}
         <div className="flex items-center justify-between gap-4">
           {/* Logo */}
@@ -106,38 +106,40 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* Horizontal Navigation: Games | Apps | News | Store */}
-        <nav
-          id="main-nav-menu"
-          aria-label="Marketplace Navigation"
-          className="mt-3 flex items-center gap-6 overflow-x-auto no-scrollbar border-t border-gray-100 pt-1"
-        >
-          {[
-            { id: 'games', label: 'Games' },
-            { id: 'apps', label: 'Apps' },
-            { id: 'news', label: 'News' },
-            { id: 'store', label: 'Store' }
-          ].map((tab) => {
-            const isActive = activeNavTab === tab.id;
-            return (
-              <button
-                key={tab.id}
-                id={`nav-tab-${tab.id}`}
-                onClick={() => onNavTabChange(tab.id)}
-                className={`relative py-2.5 text-sm font-medium whitespace-nowrap transition-colors focus:outline-none ${
-                  isActive
-                    ? 'text-emerald-600 font-bold'
-                    : 'text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                <span>{tab.label}</span>
-                {isActive && (
-                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600 rounded-full" />
-                )}
-              </button>
-            );
-          })}
-        </nav>
+        {/* Horizontal Navigation: Games | Apps | News | Store (Hidden during active search) */}
+        {!searchQuery.trim() && (
+          <nav
+            id="main-nav-menu"
+            aria-label="Marketplace Navigation"
+            className="mt-3 flex items-center gap-6 overflow-x-auto no-scrollbar border-t border-gray-100 pt-1"
+          >
+            {[
+              { id: 'games', label: 'Games' },
+              { id: 'apps', label: 'Apps' },
+              { id: 'news', label: 'News' },
+              { id: 'store', label: 'Store' }
+            ].map((tab) => {
+              const isActive = activeNavTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  id={`nav-tab-${tab.id}`}
+                  onClick={() => onNavTabChange(tab.id)}
+                  className={`relative py-2.5 text-sm font-medium whitespace-nowrap transition-colors focus:outline-none ${
+                    isActive
+                      ? 'text-emerald-600 font-bold'
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  <span>{tab.label}</span>
+                  {isActive && (
+                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600 rounded-full" />
+                  )}
+                </button>
+              );
+            })}
+          </nav>
+        )}
       </div>
     </header>
   );

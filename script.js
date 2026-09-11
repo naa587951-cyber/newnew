@@ -158,6 +158,14 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderMarketplace() {
     const q = currentSearch.toLowerCase().trim();
 
+    const mainNav = document.querySelector(".main-nav");
+    if (mainNav) {
+      mainNav.style.display = q ? "none" : "flex";
+    }
+    if (categoryContainer) {
+      categoryContainer.style.display = q ? "none" : "flex";
+    }
+
     const filtered = games.filter(g => {
       const matchCat = currentCategory === "All" || g.categories.includes(currentCategory);
       const matchQuery = !q ||
