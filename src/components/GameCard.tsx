@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import { Download, Star, ShieldCheck, Smartphone, Clock, Sparkles } from 'lucide-react';
+import { Download, Star, Check } from 'lucide-react';
 import { Game } from '../types';
 
 interface GameCardProps {
   game: Game;
   onDownload: (gameId: string) => void;
+  isFeatured?: boolean;
 }
 
-export const GameCard: React.FC<GameCardProps> = ({ game, onDownload }) => {
+export const GameCard: React.FC<GameCardProps> = ({ game, onDownload, isFeatured = false }) => {
   const [imgSrc, setImgSrc] = useState<string>(game.image);
   const [isDownloading, setIsDownloading] = useState<boolean>(false);
 
   const handleImageError = () => {
-    // Graceful fallback chain if path resolution varies in sandbox preview
     if (!imgSrc.startsWith('/')) {
       setImgSrc(`/${game.image}`);
     } else if (imgSrc.includes('assets/images/')) {
@@ -20,131 +20,94 @@ export const GameCard: React.FC<GameCardProps> = ({ game, onDownload }) => {
     }
   };
 
-  const handleBtnClick = () => {
+  const handleClick = () => {
     setIsDownloading(true);
     onDownload(game.id);
     setTimeout(() => {
       setIsDownloading(false);
-    }, 2000);
+    }, 2500);
   };
 
   return (
     <div
       id={`card-${game.id}`}
-      className="group w-full rounded-2xl bg-gradient-to-b from-[#141829] to-[#0d0f1b] border border-slate-800/80 hover:border-purple-500/50 shadow-lg shadow-black/40 hover:shadow-purple-900/20 transition-all duration-300 overflow-hidden flex flex-col"
+      className={`relative shrink-0 snap-start rounded-2xl bg-white border transition-all duration-200 flex flex-col justify-between p-3 select-none ${
+        isFeatured
+          ? 'w-[245px] sm:w-[265px] border-emerald-400 ring-1 ring-emerald-500/20 shadow-[0_2px_10px_rgba(16,185,129,0.12)]'
+          : 'w-[230px] sm:w-[250px] border-gray-200/90 shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] hover:border-gray-300'
+      }`}
     >
-      {/* Top Image Container */}
-      <div className="relative w-full h-48 sm:h-52 bg-slate-950 overflow-hidden">
+      {/* Top Banner / Image */}
+      <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden bg-gray-100 border border-gray-100">
         <img
           src={imgSrc}
           alt={game.title}
           onError={handleImageError}
           referrerPolicy="no-referrer"
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          loading="lazy"
+          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
         />
 
-        {/* Subtle Dark Gradient Overlay for text contrast */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#141829] via-[#141829]/20 to-transparent" />
+        {/* Featured Badge */}
+        {isFeatured && (
+          <div className="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-emerald-600 text-white text-[10px] font-bold tracking-wider uppercase shadow-sm">
+            Featured
+          </div>
+        )}
 
-        {/* Top Badges */}
-        <div className="absolute top-3 left-3 flex items-center gap-2">
-          <span className="px-2.5 py-1 rounded-lg bg-[#090b14]/85 backdrop-blur-md border border-purple-500/30 text-purple-300 text-[11px] font-bold tracking-wide shadow-md">
-            {game.category}
-          </span>
-        </div>
-
-        <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-black/75 backdrop-blur-md border border-amber-500/30 text-amber-300 text-[11px] font-bold shadow-md">
+        {/* Rating badge */}
+        <div className="absolute top-2 right-2 flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-white/90 backdrop-blur-xs text-gray-800 text-[11px] font-bold border border-gray-200/60 shadow-xs">
           <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
           <span>{game.rating}</span>
         </div>
+      </div>
 
-        {/* Downloads indicator */}
-        <div className="absolute bottom-3 left-3 flex items-center gap-1 text-[11px] font-medium text-slate-300 bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded-md">
-          <Download className="w-3 h-3 text-cyan-400" />
-          <span>{game.downloads} downloads</span>
+      {/* Game Details */}
+      <div className="mt-2.5 flex-1 flex flex-col">
+        {/* Title */}
+        <h3 className="font-bold text-gray-900 text-sm leading-snug line-clamp-1">
+          {game.title}
+        </h3>
+
+        {/* Short category */}
+        <p className="text-xs text-emerald-700 font-medium mt-0.5">
+          {game.category}
+        </p>
+
+        {/* Version & Platform pill row */}
+        <div className="flex items-center gap-1.5 mt-2 text-[11px] text-gray-500 font-medium">
+          <span className="bg-gray-100 px-1.5 py-0.5 rounded text-gray-600 font-semibold">{game.version}</span>
+          <span>•</span>
+          <span>{game.platform}</span>
+          <span>•</span>
+          <span>{game.downloads}</span>
         </div>
       </div>
 
-      {/* Content Area */}
-      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between gap-4">
-        <div>
-          {/* Game Title */}
-          <h3 className="font-gaming text-lg sm:text-xl font-bold text-white tracking-wide group-hover:text-purple-300 transition-colors">
-            {game.title}
-          </h3>
-
-          {/* Short Description */}
-          <p className="mt-1.5 text-xs sm:text-sm text-slate-300 leading-relaxed">
-            {game.description}
-          </p>
-
-          {/* Features pills */}
-          {game.features && game.features.length > 0 && (
-            <div className="mt-3 flex flex-wrap gap-1.5">
-              {game.features.map((feat, idx) => (
-                <span
-                  key={idx}
-                  className="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded-md bg-purple-950/40 text-purple-300 border border-purple-800/30"
-                >
-                  <Sparkles className="w-2.5 h-2.5 text-purple-400" />
-                  {feat}
-                </span>
-              ))}
-            </div>
+      {/* Download Action Button */}
+      <div className="mt-3 pt-2 border-t border-gray-100">
+        <button
+          id={`download-btn-${game.id}`}
+          onClick={handleClick}
+          disabled={isDownloading}
+          className={`w-full py-2.5 px-3 rounded-xl font-semibold text-xs flex items-center justify-center gap-1.5 transition-all focus:outline-none active:scale-[0.98] ${
+            isFeatured
+              ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm shadow-emerald-600/30'
+              : 'bg-emerald-500 hover:bg-emerald-600 text-white shadow-xs'
+          }`}
+        >
+          {isDownloading ? (
+            <>
+              <Check className="w-3.5 h-3.5 animate-pulse" />
+              <span>Redirecting...</span>
+            </>
+          ) : (
+            <>
+              <Download className="w-3.5 h-3.5" />
+              <span>Download</span>
+            </>
           )}
-
-          {/* Structured Information Grid */}
-          <div className="mt-4 pt-3 border-t border-slate-800/80 grid grid-cols-2 gap-2 text-xs">
-            <div className="flex items-center gap-2 text-slate-400 bg-slate-900/50 p-2 rounded-xl border border-slate-800/60">
-              <Smartphone className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
-              <div className="flex flex-col min-w-0">
-                <span className="text-[10px] uppercase text-slate-400">Platform</span>
-                <span className="font-semibold text-slate-200 truncate">{game.platform}</span>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2 text-slate-400 bg-slate-900/50 p-2 rounded-xl border border-slate-800/60">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-              <div className="flex flex-col min-w-0">
-                <span className="text-[10px] uppercase text-slate-400">Version</span>
-                <span className="font-semibold text-slate-200 truncate">{game.version}</span>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2 text-slate-400 bg-slate-900/50 p-2 rounded-xl border border-slate-800/60">
-              <Clock className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-              <div className="flex flex-col min-w-0">
-                <span className="text-[10px] uppercase text-slate-400">Updated</span>
-                <span className="font-semibold text-slate-200 truncate">{game.updated}</span>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2 text-slate-400 bg-slate-900/50 p-2 rounded-xl border border-slate-800/60">
-              <Download className="w-3.5 h-3.5 text-purple-400 shrink-0" />
-              <div className="flex flex-col min-w-0">
-                <span className="text-[10px] uppercase text-slate-400">Category</span>
-                <span className="font-semibold text-slate-200 truncate">{game.category}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Big Touch-Friendly Download Button */}
-        <div className="pt-2">
-          <button
-            id={`download-btn-${game.id}`}
-            onClick={handleBtnClick}
-            disabled={isDownloading}
-            className="w-full relative group overflow-hidden rounded-xl p-[1.5px] font-bold text-white shadow-lg shadow-purple-900/20 active:scale-[0.98] transition-transform"
-          >
-            {/* Animated glowing border */}
-            <span className="absolute inset-0 bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500 rounded-xl group-hover:opacity-100 transition-opacity" />
-            <span className="relative flex items-center justify-center gap-2 px-4 py-3.5 bg-gradient-to-r from-purple-700 via-indigo-700 to-purple-800 group-hover:from-purple-600 group-hover:via-indigo-600 group-hover:to-purple-700 rounded-[10px] text-sm tracking-wider uppercase">
-              <Download className={`w-4 h-4 text-white ${isDownloading ? 'animate-bounce' : 'group-hover:translate-y-0.5 transition-transform'}`} />
-              <span>{isDownloading ? 'Connecting Vault...' : game.buttonText}</span>
-            </span>
-          </button>
-        </div>
+        </button>
       </div>
     </div>
   );

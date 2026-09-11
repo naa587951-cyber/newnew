@@ -1,395 +1,274 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <title>AllMods - Your Favorite Games. One Place.</title>
-    <meta name="description" content="Discover popular games, mods and gaming experiences for mobile." />
-    <meta property="og:title" content="AllMods - Your Favorite Games. One Place." />
-    <meta property="og:description" content="Discover popular games, mods and gaming experiences for mobile." />
+    <title>AllMods - Android APK & Game Mod Marketplace</title>
+    <meta name="description" content="Download verified Android APK mods, games, and mobile unlocks. Fast, secure, and compatible with Android devices." />
+    <meta property="og:title" content="AllMods - Android APK & Game Mod Marketplace" />
+    <meta property="og:description" content="Download verified Android APK mods, games, and mobile unlocks. Fast, secure, and compatible with Android devices." />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="theme-color" content="#090a12" />
+    <meta name="theme-color" content="#ffffff" />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,600;0,700;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Standalone Theme Stylesheet -->
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <!-- Root Container -->
+    <!-- Root Container (Hydrated by React in dev/build, or pure static HTML on GitHub Pages) -->
     <div id="root">
       <div class="app-container">
         <!-- Site Header -->
         <header class="site-header">
-          <div class="header-inner">
+          <div class="header-top">
             <a href="./index.html" class="brand-logo" id="header-brand-logo">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #c084fc;">
-                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-              </svg>
-              <span>ALL</span>MODS
+              <div class="brand-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                  <polyline points="2 17 12 22 22 17"></polyline>
+                  <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+              </div>
+              <div class="brand-text">
+                <span class="brand-name">ALL<span>MODS</span></span>
+                <span class="brand-tag">APK Marketplace</span>
+              </div>
             </a>
-            <div style="display: flex; align-items: center; gap: 8px;">
-              <span style="font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 6px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399; text-transform: uppercase;">ONLINE</span>
+
+            <!-- Desktop Search Bar -->
+            <div class="search-wrapper desktop-search">
+              <span class="search-icon-left">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              </span>
+              <input
+                type="text"
+                class="market-search-input"
+                placeholder="Search for your game..."
+              />
             </div>
           </div>
+
+          <!-- Mobile Search Bar -->
+          <div class="mobile-search-row">
+            <div class="search-wrapper">
+              <span class="search-icon-left">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              </span>
+              <input
+                type="text"
+                class="market-search-input"
+                placeholder="Search for your game..."
+              />
+            </div>
+          </div>
+
+          <!-- Navigation Menu: Games | Apps | News | Store -->
+          <nav class="main-nav" aria-label="Marketplace Navigation">
+            <a href="#games" class="nav-link active">Games</a>
+            <a href="#apps" class="nav-link">Apps</a>
+            <a href="#news" class="nav-link">News</a>
+            <a href="#store" class="nav-link">Store</a>
+          </nav>
         </header>
 
-        <!-- Hero Section -->
-        <section class="hero-section" id="hero">
-          <div class="hero-badge">
-            <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #c084fc;"></span>
-            VERIFIED MOBILE MODS • 2026 EDITION
+        <!-- Top Notification Chip -->
+        <div class="top-notification-container" id="top-notification-chip">
+          <div class="top-notification-box">
+            <div class="top-notif-left">
+              <span class="notif-pulse-dot"></span>
+              <img src="assets/images/pogo.jpg" alt="" class="toast-img" />
+              <div>
+                <span class="toast-user">@jhonn_doe</span>
+                <span style="color: #6b7280;">just got</span>
+                <span class="toast-game">Pokémon GO Spoofer</span>
+              </div>
+            </div>
+            <button id="dismiss-top-notification-btn" class="dismiss-btn" aria-label="Dismiss">✕</button>
           </div>
-          <h1 class="hero-title">
-            Your Favorite Games.
-            <span>One Place.</span>
-          </h1>
-          <p class="hero-subtitle">
-            Download the latest verified Android mods, unlocks, and premium features. Fast, safe, and directly tested on real mobile devices.
-          </p>
+        </div>
+
+        <!-- Main Content -->
+        <main style="padding-top: 10px;">
+          <!-- Category Filters -->
+          <div class="category-row" id="category-filters-container">
+            <button class="cat-btn active" data-category="All">All</button>
+            <button class="cat-btn" data-category="Adventure">Adventure</button>
+            <button class="cat-btn" data-category="Action">Action</button>
+            <button class="cat-btn" data-category="Casual">Casual</button>
+            <button class="cat-btn" data-category="Racing">Racing</button>
+            <button class="cat-btn" data-category="Simulation">Simulation</button>
+          </div>
+
+          <!-- Section 1: Popular Games (Horizontal Scrollable Row) -->
+          <section id="popular-games-section" style="margin-top: 14px;">
+            <div class="section-header">
+              <div class="section-title-wrap">
+                <h2 class="section-title">Popular Games</h2>
+                <span class="section-badge">Featured</span>
+              </div>
+              <span style="font-size: 11px; color: #6b7280;">Swipe horizontally →</span>
+            </div>
+
+            <div class="games-scroll-row" id="popular-games-row">
+              <!-- Rendered dynamically by script.js or React -->
+            </div>
+          </section>
+
+          <!-- Section 2: Latest Games & Updates (APKPure-style list) -->
+          <section id="latest-games-section" style="margin-top: 24px;">
+            <div class="section-header">
+              <div class="section-title-wrap">
+                <h2 class="section-title">Latest Games & Updates</h2>
+              </div>
+              <span class="section-link">See all</span>
+            </div>
+
+            <div class="games-list-grid" id="latest-games-list">
+              <!-- Rendered dynamically by script.js or React -->
+            </div>
+          </section>
 
           <!-- Trust Badges -->
-          <div class="trust-grid">
+          <div class="trust-badges-box">
             <div class="trust-item">
-              <span class="trust-item-val" style="color: #34d399;">100%</span>
-              <span class="trust-item-lbl">Verified Mods</span>
+              <div class="trust-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div>
+                <div class="trust-title">100% Virus-Free</div>
+                <div class="trust-desc">Every APK is verified and signature-checked.</div>
+              </div>
             </div>
+
             <div class="trust-item">
-              <span class="trust-item-val" style="color: #38bdf8;">DIRECT</span>
-              <span class="trust-item-lbl">Fast Speeds</span>
+              <div class="trust-icon" style="color: #2563eb; background: #eff6ff;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </div>
+              <div>
+                <div class="trust-title">Direct High-Speed CDN</div>
+                <div class="trust-desc">Unthrottled download speeds worldwide.</div>
+              </div>
             </div>
+
             <div class="trust-item">
-              <span class="trust-item-val" style="color: #c084fc;">FREE</span>
-              <span class="trust-item-lbl">Android Unlocks</span>
-            </div>
-          </div>
-
-          <button class="hero-cta" onclick="document.getElementById('games-section').scrollIntoView({ behavior: 'smooth' })">
-            EXPLORE ALL MODS ↓
-          </button>
-        </section>
-
-        <!-- Search Bar -->
-        <div class="search-wrapper" id="search-bar-wrap">
-          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <input
-            type="text"
-            id="search-input"
-            class="search-input"
-            placeholder="Search game, mod or genre..."
-            autocomplete="off"
-          />
-          <button id="clear-search-btn" style="display: none; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 14px; font-weight: bold;">✕</button>
-        </div>
-
-        <!-- Category Filters -->
-        <div class="category-scroll" id="category-scroll">
-          <button class="cat-btn active" data-category="All">All Games</button>
-          <button class="cat-btn" data-category="Action">Action</button>
-          <button class="cat-btn" data-category="Racing">Racing</button>
-          <button class="cat-btn" data-category="Simulation">Simulation</button>
-          <button class="cat-btn" data-category="Casual">Casual</button>
-          <button class="cat-btn" data-category="Adventure">Adventure</button>
-          <button class="cat-btn" data-category="Multiplayer">Multiplayer</button>
-        </div>
-
-        <!-- Games Section -->
-        <section id="games-section" style="padding-top: 8px;">
-          <h2 class="section-title">Popular Mods</h2>
-          <p class="section-subtitle">Tap download on any title to begin your unlock sequence.</p>
-
-          <!-- Dynamic / Pre-rendered Games Container -->
-          <div id="games-container">
-            <!-- Stumble Guys -->
-            <div class="game-card" id="card-stumble-guys">
-              <div class="game-image-wrap">
-                <img src="./assets/images/stumble.webp" alt="Stumble Guys Mod" class="game-img" loading="lazy" />
-                <span class="game-category-badge">Action / Multiplayer</span>
+              <div class="trust-icon" style="color: #d97706; background: #fffbeb;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
               </div>
-              <div class="game-card-body">
-                <h3 class="game-title">Stumble Guys Mod</h3>
-                <p class="game-description">Unlock all skins, unlimited gems & emotes, unlocked pass, and ad-free experience.</p>
-                <div class="game-info-grid">
-                  <div class="info-item"><span class="info-label">Platform</span><span class="info-val">Android</span></div>
-                  <div class="info-item"><span class="info-label">Version</span><span class="info-val">Latest</span></div>
-                  <div class="info-item"><span class="info-label">Category</span><span class="info-val">Action</span></div>
-                  <div class="info-item"><span class="info-label">Updated</span><span class="info-val">Recently Updated</span></div>
-                </div>
-                <button class="download-btn" onclick="handleDownload('stumble-guys')">DOWNLOAD MOD</button>
-              </div>
-            </div>
-
-            <!-- Toca Boca -->
-            <div class="game-card" id="card-toca-boca">
-              <div class="game-image-wrap">
-                <img src="./assets/images/toca.webp" alt="Toca Boca World Mod" class="game-img" loading="lazy" />
-                <span class="game-category-badge">Casual / Simulation</span>
-              </div>
-              <div class="game-card-body">
-                <h3 class="game-title">Toca Boca World Mod</h3>
-                <p class="game-description">All worlds unlocked, all furniture & houses accessible, character creator unlocked.</p>
-                <div class="game-info-grid">
-                  <div class="info-item"><span class="info-label">Platform</span><span class="info-val">Android</span></div>
-                  <div class="info-item"><span class="info-label">Version</span><span class="info-val">Latest</span></div>
-                  <div class="info-item"><span class="info-label">Category</span><span class="info-val">Casual</span></div>
-                  <div class="info-item"><span class="info-label">Updated</span><span class="info-val">Recently Updated</span></div>
-                </div>
-                <button class="download-btn" onclick="handleDownload('toca-boca')">DOWNLOAD MOD</button>
-              </div>
-            </div>
-
-            <!-- Car Parking Multiplayer 2 -->
-            <div class="game-card" id="card-car-parking-multiplayer-2">
-              <div class="game-image-wrap">
-                <img src="./assets/images/cpm 2.jpg" alt="Car Parking Multiplayer 2 Mod" class="game-img" loading="lazy" />
-                <span class="game-category-badge">Racing / Simulation</span>
-              </div>
-              <div class="game-card-body">
-                <h3 class="game-title">Car Parking Multiplayer 2 Mod</h3>
-                <p class="game-description">Unlimited money & coins, all 160+ cars unlocked, W16 engine swap, police lights & smoke.</p>
-                <div class="game-info-grid">
-                  <div class="info-item"><span class="info-label">Platform</span><span class="info-val">Android</span></div>
-                  <div class="info-item"><span class="info-label">Version</span><span class="info-val">Latest</span></div>
-                  <div class="info-item"><span class="info-label">Category</span><span class="info-val">Racing</span></div>
-                  <div class="info-item"><span class="info-label">Updated</span><span class="info-val">Recently Updated</span></div>
-                </div>
-                <button class="download-btn" onclick="handleDownload('car-parking-multiplayer-2')">DOWNLOAD MOD</button>
-              </div>
-            </div>
-
-            <!-- Car Parking Multiplayer 1 -->
-            <div class="game-card" id="card-car-parking-multiplayer">
-              <div class="game-image-wrap">
-                <img src="./assets/images/cpm.jfif" alt="Car Parking Multiplayer Mod" class="game-img" loading="lazy" />
-                <span class="game-category-badge">Racing / Simulation</span>
-              </div>
-              <div class="game-card-body">
-                <h3 class="game-title">Car Parking Multiplayer Mod</h3>
-                <p class="game-description">Unlimited gold & cash, free car purchases, unlocked siren, Chrome colors & tuning.</p>
-                <div class="game-info-grid">
-                  <div class="info-item"><span class="info-label">Platform</span><span class="info-val">Android</span></div>
-                  <div class="info-item"><span class="info-label">Version</span><span class="info-val">Latest</span></div>
-                  <div class="info-item"><span class="info-label">Category</span><span class="info-val">Racing</span></div>
-                  <div class="info-item"><span class="info-label">Updated</span><span class="info-val">Recently Updated</span></div>
-                </div>
-                <button class="download-btn" onclick="handleDownload('car-parking-multiplayer')">DOWNLOAD MOD</button>
-              </div>
-            </div>
-
-            <!-- Pokemon GO Spoofer -->
-            <div class="game-card" id="card-pokemon-go-spoofer">
-              <div class="game-image-wrap">
-                <img src="./assets/images/pogo.jpg" alt="Pokémon GO Spoofer Mod" class="game-img" loading="lazy" />
-                <span class="game-category-badge">Adventure / AR</span>
-              </div>
-              <div class="game-card-body">
-                <h3 class="game-title">Pokémon GO Spoofer Mod</h3>
-                <p class="game-description">Teleport GPS joystick, enhanced throw, auto-walk route generator, fast catch & IV preview.</p>
-                <div class="game-info-grid">
-                  <div class="info-item"><span class="info-label">Platform</span><span class="info-val">Android</span></div>
-                  <div class="info-item"><span class="info-label">Version</span><span class="info-val">Latest</span></div>
-                  <div class="info-item"><span class="info-label">Category</span><span class="info-val">Adventure</span></div>
-                  <div class="info-item"><span class="info-label">Updated</span><span class="info-val">Recently Updated</span></div>
-                </div>
-                <button class="download-btn" onclick="handleDownload('pokemon-go-spoofer')">DOWNLOAD</button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- How It Works Section -->
-        <section id="how-it-works" style="margin: 36px 0 24px;">
-          <h2 class="section-title">How It Works</h2>
-          <p class="section-subtitle">Get your favorite mod up and running in three simple steps.</p>
-          
-          <div style="display: flex; flex-direction: column; gap: 12px;">
-            <div style="display: flex; gap: 14px; background: #111422; border: 1px solid #1e2438; border-radius: 14px; padding: 14px;">
-              <div style="width: 36px; height: 36px; border-radius: 10px; background: rgba(147, 51, 234, 0.2); border: 1px solid rgba(168, 85, 247, 0.4); color: #c084fc; display: flex; align-items: center; justify-content: center; font-family: var(--font-gaming); font-weight: 800;">1</div>
               <div>
-                <h4 style="color: #fff; font-size: 14px; margin-bottom: 2px;">Choose a Game</h4>
-                <p style="color: #94a3b8; font-size: 12px; line-height: 1.4;">Browse through our handpicked collection of popular Android games and mods.</p>
-              </div>
-            </div>
-
-            <div style="display: flex; gap: 14px; background: #111422; border: 1px solid #1e2438; border-radius: 14px; padding: 14px;">
-              <div style="width: 36px; height: 36px; border-radius: 10px; background: rgba(99, 102, 241, 0.2); border: 1px solid rgba(99, 102, 241, 0.4); color: #818cf8; display: flex; align-items: center; justify-content: center; font-family: var(--font-gaming); font-weight: 800;">2</div>
-              <div>
-                <h4 style="color: #fff; font-size: 14px; margin-bottom: 2px;">Tap Download</h4>
-                <p style="color: #94a3b8; font-size: 12px; line-height: 1.4;">Click the download button on your selected game card to start the unlock process.</p>
-              </div>
-            </div>
-
-            <div style="display: flex; gap: 14px; background: #111422; border: 1px solid #1e2438; border-radius: 14px; padding: 14px;">
-              <div style="width: 36px; height: 36px; border-radius: 10px; background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.4); color: #34d399; display: flex; align-items: center; justify-content: center; font-family: var(--font-gaming); font-weight: 800;">3</div>
-              <div>
-                <h4 style="color: #fff; font-size: 14px; margin-bottom: 2px;">Follow Instructions</h4>
-                <p style="color: #94a3b8; font-size: 12px; line-height: 1.4;">Complete quick device verification if prompted, then download and install your mod package.</p>
+                <div class="trust-title">Android 8.0+ Ready</div>
+                <div class="trust-desc">Tested across Samsung, Xiaomi, and Pixel.</div>
               </div>
             </div>
           </div>
-        </section>
 
-        <!-- FAQ Section -->
-        <section id="faq" style="margin: 36px 0 24px;">
-          <h2 class="section-title">Frequently Asked Questions</h2>
-          <p class="section-subtitle">Everything you need to know about our mods and platform.</p>
-
-          <div class="faq-item">
-            <button class="faq-question">
-              <span>What is AllMods?</span>
-              <span style="font-size: 18px; color: #a855f7;">+</span>
-            </button>
-            <div class="faq-answer">
-              AllMods is a curated directory providing mobile gamers with direct links to verified mods, unlocked features, and game modifications for popular titles.
+          <!-- FAQ Accordion -->
+          <section class="faq-section" id="faq">
+            <div class="faq-title-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: #10b981;"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <h3 class="faq-main-title">Frequently Asked Questions</h3>
             </div>
-          </div>
+            <div class="faq-list">
+              <div class="faq-item open">
+                <button class="faq-item-btn">
+                  <span>How do I install an APK mod on Android?</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                  Tap the Download button for your game, complete any required verification, download the package, and tap to install. Ensure "Install unknown apps" is permitted in Android Settings.
+                </div>
+              </div>
 
-          <div class="faq-item">
-            <button class="faq-question">
-              <span>Are these mods free to download?</span>
-              <span style="font-size: 18px; color: #a855f7;">+</span>
-            </button>
-            <div class="faq-answer">
-              Yes, all mods listed in our portal are completely free to access. Some offers may require brief verification to prevent automated bot scraping.
-            </div>
-          </div>
+              <div class="faq-item">
+                <button class="faq-item-btn">
+                  <span>Do I need to root my device?</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                  No root is required. All packages on AllMods are non-root versions engineered to work out of the box on standard Android devices.
+                </div>
+              </div>
 
-          <div class="faq-item">
-            <button class="faq-question">
-              <span>How do I install on my device?</span>
-              <span style="font-size: 18px; color: #a855f7;">+</span>
-            </button>
-            <div class="faq-answer">
-              Enable "Install from Unknown Sources" in your Android security settings, download the APK file through our download link, and open it to install.
+              <div class="faq-item">
+                <button class="faq-item-btn">
+                  <span>Are the game files safe to download?</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="faq-answer">
+                  Yes, each game release is analyzed against standard security databases to ensure no malicious scripts or telemetry trackers are included.
+                </div>
+              </div>
             </div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-question">
-              <span>Will these mods work on iOS?</span>
-              <span style="font-size: 18px; color: #a855f7;">+</span>
-            </button>
-            <div class="faq-answer">
-              Currently our mods are optimized for Android (APK). We are working on web-based and sideloadable profiles for iOS users in future updates.
-            </div>
-          </div>
-        </section>
+          </section>
+        </main>
 
         <!-- Footer -->
-        <footer style="margin-top: 40px; padding: 24px 0 40px; border-top: 1px solid #1e2438; text-align: center;">
-          <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #c084fc;">
-              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-            </svg>
-            <span style="font-family: var(--font-gaming); font-weight: 800; font-size: 18px; color: #fff;">ALL<span style="color: #c084fc;">MODS</span></span>
+        <footer class="site-footer">
+          <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <div style="width: 28px; height: 28px; border-radius: 8px; background: #10b981; display: flex; align-items: center; justify-content: center; color: #fff;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            </div>
+            <span style="font-size: 16px; font-weight: 900; color: #111827;">ALL<span style="color: #10b981;">MODS</span></span>
           </div>
 
-          <!-- Legal Pages Navigation -->
-          <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 16px; font-size: 12px;">
-            <a href="privacy.html" style="color: #94a3b8; text-decoration: none;">Privacy Policy</a>
-            <span style="color: #475569;">•</span>
-            <a href="disclaimer.html" style="color: #94a3b8; text-decoration: none;">Disclaimer</a>
-            <span style="color: #475569;">•</span>
-            <a href="contact.html" style="color: #94a3b8; text-decoration: none;">Contact Us</a>
+          <div class="footer-nav-row">
+            <a href="#games">Games</a>
+            <a href="#apps">Apps</a>
+            <a href="#news">News</a>
+            <a href="#store">Store</a>
           </div>
 
-          <p style="font-size: 11px; color: #64748b; line-height: 1.5; max-width: 440px; margin: 0 auto 12px;">
-            <strong>Disclaimer:</strong> AllMods is an independent third-party directory for informational purposes only. Pokémon GO, Car Parking Multiplayer, Toca Boca, and Stumble Guys are registered trademarks of their respective copyright holders.
+          <div class="footer-nav-row" style="margin-top: 8px; font-size: 11px; color: #6b7280;">
+            <button onclick="openLegalModal('privacy')">Privacy</button>
+            <span>•</span>
+            <button onclick="openLegalModal('disclaimer')">Disclaimer</button>
+            <span>•</span>
+            <button onclick="openLegalModal('contact')">Contact</button>
+          </div>
+
+          <div style="margin-top: 10px; font-size: 11px; color: #9ca3af;">
+            <span>Static pages: </span>
+            <a href="privacy.html" style="text-decoration: underline;">privacy.html</a> |
+            <a href="disclaimer.html" style="text-decoration: underline;">disclaimer.html</a> |
+            <a href="contact.html" style="text-decoration: underline;">contact.html</a>
+          </div>
+
+          <p class="footer-disclaimer-text">
+            AllMods is an independent discovery marketplace. Not affiliated with Google LLC, Niantic, Scopely, Toca Boca, or olzhass. All trademarks belong to their respective owners.
           </p>
 
-          <p style="font-size: 11px; color: #475569;">
-            © 2026 AllMods Mobile Gaming. All rights reserved.
+          <p style="margin-top: 12px; font-size: 11px; color: #9ca3af;">
+            © 2026 ALLMODS. All rights reserved.
           </p>
         </footer>
-      </div>
 
-      <!-- Floating Notification Toast -->
-      <div id="notification-toast" class="notification-toast toast-hidden">
-        <img src="./assets/images/stumble.webp" alt="Recent Game" class="toast-img" />
-        <div style="flex: 1; min-width: 0;">
-          <div style="font-size: 11px; color: #34d399; font-weight: 700; display: flex; align-items: center; gap: 4px;">
-            <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #34d399;"></span>
-            <span class="toast-user">@player</span> downloaded
-          </div>
-          <div class="toast-game" style="font-size: 12px; font-weight: 700; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-            Stumble Guys Mod
-          </div>
-          <div style="font-size: 10px; color: #64748b;">Just now • Verified</div>
-        </div>
-        <button id="close-toast-btn" style="background: none; border: none; color: #94a3b8; font-size: 16px; cursor: pointer; padding: 4px;">✕</button>
-      </div>
-
-      <!-- Bottom Navigation for Mobile -->
-      <nav class="bottom-nav">
-        <button class="nav-item active" data-target="hero">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-            <polyline points="9 22 9 12 15 12 15 22"></polyline>
-          </svg>
-          <span>Home</span>
-        </button>
-        <button class="nav-item" data-target="games-section">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-          </svg>
-          <span>Mods</span>
-        </button>
-        <button class="nav-item" data-target="search">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          <span>Search</span>
-        </button>
-        <button class="nav-item" data-target="faq">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-            <line x1="12" y1="17" x2="12.01" y2="17"></line>
-          </svg>
-          <span>FAQ</span>
-        </button>
-      </nav>
-
-      <!-- Legal Modal Dialog -->
-      <div id="legal-modal" class="modal-backdrop" style="display: none;">
-        <div class="modal-dialog">
-          <div class="modal-header">
-            <span class="modal-title">LEGAL INFORMATION</span>
-            <button class="modal-close-btn" onclick="closeLegalModal()">✕</button>
-          </div>
-          <div class="modal-tabs">
-            <button class="modal-tab-btn active" data-tab="privacy" onclick="switchLegalTab('privacy')">Privacy</button>
-            <button class="modal-tab-btn" data-tab="disclaimer" onclick="switchLegalTab('disclaimer')">Disclaimer</button>
-            <button class="modal-tab-btn" data-tab="contact" onclick="switchLegalTab('contact')">Contact</button>
-          </div>
-          <div class="modal-body">
-            <div id="modal-content-privacy" class="modal-tab-content">
-              <h3>Privacy Policy</h3>
-              <p>AllMods does not harvest, store, or sell personal identifying data or user phone credentials. Standard device metrics and download telemetry are processed strictly to ensure link routing.</p>
-              <p>For more details, visit our standalone <a href="privacy.html" style="color: #c084fc;">Privacy Policy</a> page.</p>
+        <!-- Legal Modal Dialog -->
+        <div id="legal-modal" class="modal-overlay">
+          <div class="modal-dialog">
+            <div class="modal-header">
+              <span class="modal-title">Legal Information</span>
+              <button onclick="closeLegalModal()" style="font-size: 18px; color: #9ca3af;">✕</button>
             </div>
-            <div id="modal-content-disclaimer" class="modal-tab-content" style="display: none;">
-              <h3>Disclaimer</h3>
-              <p>All trademarks, registered names, game artwork, and game titles featured are properties of their respective owners. AllMods is not affiliated with, endorsed by, or sponsored by Niantic, Olzhass, Toca Boca, or Scopely.</p>
-              <p>Read the complete <a href="disclaimer.html" style="color: #c084fc;">Disclaimer</a>.</p>
+            <div class="modal-tabs">
+              <button class="modal-tab-btn active" data-tab="disclaimer" onclick="switchLegalTab('disclaimer')">Disclaimer</button>
+              <button class="modal-tab-btn" data-tab="privacy" onclick="switchLegalTab('privacy')">Privacy</button>
+              <button class="modal-tab-btn" data-tab="contact" onclick="switchLegalTab('contact')">Contact</button>
             </div>
-            <div id="modal-content-contact" class="modal-tab-content" style="display: none;">
-              <h3>Contact Us</h3>
-              <p>Have inquiries, broken link reports, or copyright takedown notices? Contact our administration desk:</p>
-              <p>Email: <a href="mailto:support@allmods.net" style="color: #c084fc;">support@allmods.net</a></p>
-              <p>Visit the full <a href="contact.html" style="color: #c084fc;">Contact</a> page.</p>
+            <div class="modal-body">
+              <div id="modal-content-disclaimer" class="modal-tab-content">
+                <p><strong>Non-Affiliation Notice:</strong> AllMods is an independent indexing portal and is not associated with Niantic, Scopely, Toca Boca, or olzhass. All product names and registered trademarks are property of their respective owners.</p>
+              </div>
+              <div id="modal-content-privacy" class="modal-tab-content" style="display: none;">
+                <p><strong>Privacy:</strong> We respect your privacy. We do not store personal contact information or payment credentials. Client-side local storage is used solely to record game selections.</p>
+              </div>
+              <div id="modal-content-contact" class="modal-tab-content" style="display: none;">
+                <p><strong>Contact Desk:</strong> For catalog inquiries and DMCA requests, contact <strong>support@allmods.site</strong>.</p>
+              </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button onclick="closeLegalModal()" style="padding: 8px 18px; border-radius: 10px; background: #1f253d; border: 1px solid #334155; color: #fff; font-size: 12px; font-weight: 600; cursor: pointer;">Close</button>
           </div>
         </div>
       </div>
@@ -399,6 +278,6 @@
     <script type="module" src="./script.js"></script>
 
     <!-- React Bundler Script Entry (Vite build / dev mode) -->
-    <script type="module" src="./src/main.tsx"></script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

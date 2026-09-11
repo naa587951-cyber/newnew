@@ -1,27 +1,21 @@
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Header } from './components/Header';
-import { Hero } from './components/Hero';
-import { SearchBar } from './components/SearchBar';
+import { NotificationPopup } from './components/NotificationPopup';
 import { CategoryFilters } from './components/CategoryFilters';
 import { GameCard } from './components/GameCard';
-import { HowItWorks } from './components/HowItWorks';
+import { GameListItem } from './components/GameListItem';
 import { FAQAccordion } from './components/FAQAccordion';
 import { Footer } from './components/Footer';
-import { BottomNav } from './components/BottomNav';
-import { NotificationPopup } from './components/NotificationPopup';
 import { LegalModal } from './components/LegalModal';
 import { games, handleDownload } from './data/games';
 import { CategoryFilter } from './types';
-import { Flame, RefreshCw, AlertCircle } from 'lucide-react';
+import { Sparkles, ShieldCheck, Zap, Smartphone, ChevronRight, SearchX } from 'lucide-react';
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>('All');
-  const [activeNavTab, setActiveNavTab] = useState<string>('hero');
+  const [activeNavTab, setActiveNavTab] = useState<string>('games');
   const [legalPage, setLegalPage] = useState<'privacy' | 'disclaimer' | 'contact' | null>(null);
-  const [downloadToast, setDownloadToast] = useState<{ gameTitle: string } | null>(null);
-
-  const searchInputRef = useRef<HTMLInputElement>(null);
 
   // Category counts calculation
   const categoryCounts = useMemo(() => {
@@ -36,15 +30,16 @@ export default function App() {
 
   // Filtered games based on Search Query and Category
   const filteredGames = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+
     return games.filter((game) => {
       // Category Match
       const matchesCategory =
         selectedCategory === 'All' || game.categories.includes(selectedCategory);
 
-      // Search Query Match (checks title, category, tags, and description)
-      const query = searchQuery.trim().toLowerCase();
       if (!query) return matchesCategory;
 
+      // Search matches title, category, id, description, and keywords
       const matchesQuery =
         game.title.toLowerCase().includes(query) ||
         game.category.toLowerCase().includes(query) ||
@@ -56,161 +51,226 @@ export default function App() {
     });
   }, [searchQuery, selectedCategory]);
 
-  const scrollToSection = (sectionId: string) => {
-    setActiveNavTab(sectionId);
-    if (sectionId === 'search') {
-      const el = document.getElementById('games-section');
-      el?.scrollIntoView({ behavior: 'smooth' });
-      setTimeout(() => {
-        searchInputRef.current?.focus();
-      }, 400);
-      return;
-    }
-
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const handleDownloadClick = (gameId: string) => {
-    const game = games.find((g) => g.id === gameId);
-    if (game) {
-      setDownloadToast({ gameTitle: game.title });
-      setTimeout(() => {
-        setDownloadToast(null);
-      }, 3500);
-    }
-    handleDownload(gameId);
-  };
+  const categoriesList: CategoryFilter[] = [
+    'All',
+    'Adventure',
+    'Action',
+    'Casual',
+    'Racing',
+    'Simulation'
+  ];
 
   return (
-    <div className="min-h-screen bg-[#08090e] text-slate-100 flex flex-col antialiased selection:bg-purple-600 selection:text-white">
-      {/* Sticky Mobile Header */}
+    <div className="min-h-screen flex flex-col bg-[#f7f9fa] text-gray-900 antialiased selection:bg-emerald-100 selection:text-emerald-900">
+      {/* 1. Marketplace Header with Search & Nav */}
       <Header
-        onSearchClick={() => scrollToSection('search')}
-        onNavigate={scrollToSection}
-        onOpenLegal={(page) => setLegalPage(page)}
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        activeNavTab={activeNavTab}
+        onNavTabChange={(tab) => {
+          setActiveNavTab(tab);
+          if (tab !== 'games') {
+            // Scroll to games or keep user oriented
+            const el = document.getElementById('popular-games-section');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }
+        }}
+        onOpenLegal={setLegalPage}
       />
 
+      {/* 2. Top Notification: Small marketplace activity ticker */}
+      <NotificationPopup />
+
       {/* Main Content Area */}
-      <main className="flex-1 w-full max-w-md md:max-w-lg lg:max-w-2xl mx-auto px-4 pb-20">
-        {/* Hero Section */}
-        <Hero onExploreClick={() => scrollToSection('games-section')} />
-
-        {/* Popular Mods Section */}
-        <section id="games-section" className="pt-6 pb-6">
-          {/* Section Header */}
-          <div className="flex flex-col mb-4">
-            <div className="flex items-center gap-2">
-              <div className="p-1 rounded-lg bg-amber-500/20 text-amber-400">
-                <Flame className="w-4 h-4" />
+      <main className="flex-1 max-w-4xl w-full mx-auto px-4 py-3">
+        {/* Search Mode or Regular Discovery Mode */}
+        {searchQuery.trim() ? (
+          /* ==================================================== */
+          /* SEARCH RESULTS VIEW                                  */
+          /* ==================================================== */
+          <section id="search-results-section" className="py-2">
+            <div className="flex items-center justify-between pb-3 border-b border-gray-200">
+              <div>
+                <h2 className="text-base sm:text-lg font-bold text-gray-900">
+                  Search Results
+                </h2>
+                <p className="text-xs text-gray-500 mt-0.5">
+                  Showing matches for <span className="font-semibold text-emerald-700">"{searchQuery}"</span>
+                </p>
               </div>
-              <h2 className="font-gaming text-2xl font-bold tracking-tight text-white">
-                Popular Mods
-              </h2>
-            </div>
-            <p className="text-xs text-slate-400 mt-1">
-              Explore our latest game additions.
-            </p>
-          </div>
-
-          {/* Search Input Bar */}
-          <div className="mb-3">
-            <SearchBar
-              ref={searchInputRef}
-              query={searchQuery}
-              onQueryChange={setSearchQuery}
-              resultCount={filteredGames.length}
-            />
-          </div>
-
-          {/* Horizontal Category Filters */}
-          <div className="mb-5">
-            <CategoryFilters
-              selectedCategory={selectedCategory}
-              onSelectCategory={setSelectedCategory}
-              categoryCounts={categoryCounts}
-            />
-          </div>
-
-          {/* Game Cards List */}
-          {filteredGames.length > 0 ? (
-            <div className="space-y-4">
-              {filteredGames.map((game) => (
-                <GameCard
-                  key={game.id}
-                  game={game}
-                  onDownload={handleDownloadClick}
-                />
-              ))}
-            </div>
-          ) : (
-            /* Empty Search/Filter State */
-            <div className="p-8 rounded-2xl bg-slate-900/60 border border-slate-800 text-center space-y-3">
-              <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center mx-auto text-slate-400">
-                <AlertCircle className="w-6 h-6" />
-              </div>
-              <h3 className="font-semibold text-white text-base">No games found</h3>
-              <p className="text-xs text-slate-400 max-w-xs mx-auto">
-                No titles match "{searchQuery}". Try a different keyword or reset the category filter.
-              </p>
               <button
-                onClick={() => {
-                  setSearchQuery('');
-                  setSelectedCategory('All');
-                }}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-xs font-bold text-white transition-colors"
+                onClick={() => setSearchQuery('')}
+                className="text-xs font-semibold text-emerald-600 hover:text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg transition-colors"
               >
-                <RefreshCw className="w-3.5 h-3.5" />
-                Reset Filters
+                Clear Search
               </button>
             </div>
-          )}
-        </section>
 
-        {/* How It Works Section */}
-        <HowItWorks />
+            {filteredGames.length > 0 ? (
+              <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {filteredGames.map((game) => (
+                  <GameListItem
+                    key={game.id}
+                    game={game}
+                    onDownload={handleDownload}
+                    badgeText={game.id === 'pokemon-go-spoofer' ? 'Popular' : undefined}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="py-12 text-center bg-white rounded-2xl border border-gray-200/90 mt-4 p-6">
+                <SearchX className="w-10 h-10 text-gray-400 mx-auto mb-2" />
+                <h3 className="font-bold text-gray-900 text-sm">No games found</h3>
+                <p className="text-xs text-gray-500 mt-1 max-w-sm mx-auto">
+                  We couldn't find any results matching "{searchQuery}". Try searching for "pokemon", "stumble", "toca", or "parking".
+                </p>
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="mt-3.5 px-4 py-2 bg-emerald-600 text-white rounded-xl text-xs font-semibold hover:bg-emerald-700 transition-colors"
+                >
+                  View All Games
+                </button>
+              </div>
+            )}
+          </section>
+        ) : (
+          /* ==================================================== */
+          /* STANDARD MARKETPLACE VIEW                            */
+          /* ==================================================== */
+          <div className="space-y-6">
+            {/* Category Filter Pills */}
+            <div className="pt-1">
+              <CategoryFilters
+                categories={categoriesList}
+                selectedCategory={selectedCategory}
+                onSelectCategory={setSelectedCategory}
+                categoryCounts={categoryCounts}
+              />
+            </div>
 
-        {/* FAQ Accordion Section */}
-        <FAQAccordion />
+            {/* 3. Section: "Popular Games" (Horizontal Scrollable Row) */}
+            <section id="popular-games-section" className="relative">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2">
+                  <h2 className="text-base sm:text-lg font-black tracking-tight text-gray-900">
+                    Popular Games
+                  </h2>
+                  <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/60">
+                    Top Verified
+                  </span>
+                </div>
+                <span className="text-xs text-gray-500 font-medium hidden sm:inline">
+                  Swipe horizontally →
+                </span>
+              </div>
+
+              {/* Horizontal Scroll Row */}
+              <div className="relative -mx-4 px-4 sm:mx-0 sm:px-0">
+                <div
+                  id="popular-games-row"
+                  className="flex gap-3 overflow-x-auto snap-x scrollbar-none pb-2 pt-1"
+                >
+                  {filteredGames.map((game) => (
+                    <GameCard
+                      key={game.id}
+                      game={game}
+                      onDownload={handleDownload}
+                      isFeatured={game.id === 'pokemon-go-spoofer'}
+                    />
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* 4. Section: "Recommended For You" / "Latest Games" */}
+            <section id="recommended-section" className="pt-2">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2">
+                  <h2 className="text-base sm:text-lg font-black tracking-tight text-gray-900">
+                    Latest Games & Updates
+                  </h2>
+                </div>
+                <button
+                  onClick={() => setSelectedCategory('All')}
+                  className="text-xs font-semibold text-emerald-600 hover:text-emerald-700 flex items-center gap-0.5"
+                >
+                  <span>See all</span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+
+              {/* Grid / List of Existing Games */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {games.map((game, idx) => (
+                  <GameListItem
+                    key={`list-${game.id}`}
+                    game={game}
+                    onDownload={handleDownload}
+                    badgeText={idx === 0 ? 'Top Pick' : 'Updated'}
+                  />
+                ))}
+              </div>
+            </section>
+
+            {/* 5. Clean Trust Badges: Android Marketplace Standards */}
+            <section className="bg-white border border-gray-200/90 rounded-2xl p-4 shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-left">
+                <div className="flex items-start gap-2.5 p-1">
+                  <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                    <ShieldCheck className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-gray-900">100% Virus-Free</h4>
+                    <p className="text-[11px] text-gray-500 mt-0.5">Every APK package signature is verified before indexing.</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2.5 p-1">
+                  <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                    <Zap className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-gray-900">Fast CDN Mirrors</h4>
+                    <p className="text-[11px] text-gray-500 mt-0.5">High-speed content delivery networks for instant downloads.</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2.5 p-1">
+                  <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+                    <Smartphone className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-gray-900">Android Compatible</h4>
+                    <p className="text-[11px] text-gray-500 mt-0.5">Optimized for Android 8.0 through the latest Android 15.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* 6. FAQ Accordion */}
+            <FAQAccordion />
+          </div>
+        )}
       </main>
 
       {/* Footer */}
-      <Footer onOpenLegal={(page) => setLegalPage(page)} />
-
-      {/* Fixed Mobile Bottom Navigation */}
-      <BottomNav
-        activeTab={activeNavTab}
-        onTabSelect={(tab) => scrollToSection(tab === 'games' ? 'games-section' : tab)}
+      <Footer
+        onOpenLegal={setLegalPage}
+        onNavigateTab={(tab) => {
+          setActiveNavTab(tab);
+          if (tab === 'games') {
+            setSelectedCategory('All');
+            setSearchQuery('');
+          }
+        }}
       />
 
-      {/* Floating Simulated Activity Popup */}
-      <NotificationPopup />
-
-      {/* In-App Legal Modal */}
+      {/* Legal Dialog Modal */}
       <LegalModal
         page={legalPage}
         onClose={() => setLegalPage(null)}
-        onSwitchPage={(page) => setLegalPage(page)}
+        onSwitchPage={setLegalPage}
       />
-
-      {/* Download Confirmation Toast */}
-      {downloadToast && (
-        <aside
-          aria-label="Download status notice"
-          id="download-status-toast"
-          className="fixed top-16 left-4 right-4 max-w-md mx-auto z-50 p-3 rounded-2xl bg-[#12162a] border border-purple-500/50 shadow-2xl flex items-center gap-3 animate-fade-in"
-        >
-          <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
-          <div className="flex-1 text-xs">
-            <span className="font-bold text-white">Opening Content Locker...</span>
-            <p className="text-[11px] text-slate-300">
-              Connecting to secure download for {downloadToast.gameTitle}
-            </p>
-          </div>
-        </aside>
-      )}
     </div>
   );
 }

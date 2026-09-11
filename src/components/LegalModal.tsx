@@ -13,21 +13,21 @@ export const LegalModal: React.FC<LegalModalProps> = ({ page, onClose, onSwitchP
   return (
     <div
       id="legal-modal-backdrop"
-      className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 animate-fade-in"
+      className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4 animate-fade-in"
       onClick={onClose}
     >
       <div
         id="legal-modal-content"
-        className="w-full sm:max-w-lg max-h-[88vh] bg-[#0c0e1a] border-t sm:border border-purple-900/40 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden text-slate-200 animate-slide-up"
+        className="w-full sm:max-w-lg max-h-[85vh] bg-white border-t sm:border border-gray-200 rounded-t-2xl sm:rounded-2xl shadow-xl flex flex-col overflow-hidden text-gray-800"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
-        <div className="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/60">
+        <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/70">
           <div className="flex items-center gap-2">
-            {page === 'privacy' && <FileText className="w-5 h-5 text-purple-400" />}
-            {page === 'disclaimer' && <ShieldAlert className="w-5 h-5 text-amber-400" />}
-            {page === 'contact' && <Mail className="w-5 h-5 text-cyan-400" />}
-            <h2 className="font-gaming text-lg font-bold text-white uppercase tracking-wide">
+            {page === 'privacy' && <FileText className="w-5 h-5 text-emerald-600" />}
+            {page === 'disclaimer' && <ShieldAlert className="w-5 h-5 text-amber-600" />}
+            {page === 'contact' && <Mail className="w-5 h-5 text-blue-600" />}
+            <h2 className="text-base font-bold text-gray-900">
               {page === 'privacy' && 'Privacy Policy'}
               {page === 'disclaimer' && 'Legal Disclaimer'}
               {page === 'contact' && 'Contact Support'}
@@ -36,20 +36,20 @@ export const LegalModal: React.FC<LegalModalProps> = ({ page, onClose, onSwitchP
           <button
             id="close-legal-modal-btn"
             onClick={onClose}
-            className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            className="p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Tab switcher */}
-        <div className="grid grid-cols-3 bg-slate-950 border-b border-slate-800 text-xs font-semibold text-center">
+        <div className="grid grid-cols-3 bg-gray-50 border-b border-gray-200 text-xs font-semibold text-center">
           <button
             onClick={() => onSwitchPage('disclaimer')}
             className={`py-2.5 transition-colors border-b-2 ${
-              page === 'disclaimer' 
-                ? 'border-purple-500 text-purple-300 bg-purple-950/20' 
-                : 'border-transparent text-slate-400 hover:text-white'
+              page === 'disclaimer'
+                ? 'border-emerald-600 text-emerald-700 bg-white font-bold'
+                : 'border-transparent text-gray-500 hover:text-gray-800'
             }`}
           >
             Disclaimer
@@ -57,19 +57,19 @@ export const LegalModal: React.FC<LegalModalProps> = ({ page, onClose, onSwitchP
           <button
             onClick={() => onSwitchPage('privacy')}
             className={`py-2.5 transition-colors border-b-2 ${
-              page === 'privacy' 
-                ? 'border-purple-500 text-purple-300 bg-purple-950/20' 
-                : 'border-transparent text-slate-400 hover:text-white'
+              page === 'privacy'
+                ? 'border-emerald-600 text-emerald-700 bg-white font-bold'
+                : 'border-transparent text-gray-500 hover:text-gray-800'
             }`}
           >
-            Privacy Policy
+            Privacy
           </button>
           <button
             onClick={() => onSwitchPage('contact')}
             className={`py-2.5 transition-colors border-b-2 ${
-              page === 'contact' 
-                ? 'border-purple-500 text-purple-300 bg-purple-950/20' 
-                : 'border-transparent text-slate-400 hover:text-white'
+              page === 'contact'
+                ? 'border-emerald-600 text-emerald-700 bg-white font-bold'
+                : 'border-transparent text-gray-500 hover:text-gray-800'
             }`}
           >
             Contact
@@ -77,101 +77,66 @@ export const LegalModal: React.FC<LegalModalProps> = ({ page, onClose, onSwitchP
         </div>
 
         {/* Modal Body */}
-        <div className="p-5 overflow-y-auto space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed max-h-[60vh]">
+        <div className="p-5 overflow-y-auto space-y-4 text-xs sm:text-sm text-gray-600 leading-relaxed">
           {page === 'disclaimer' && (
             <div className="space-y-3">
-              <h3 className="text-sm font-bold text-white">1. Independence & Non-Affiliation</h3>
-              <p>
-                AllMods is an independent directory and catalog resource. AllMods is <strong>NOT</strong> affiliated, associated, authorized, endorsed by, or in any way officially connected with Niantic, Scopely, Toca Boca, olzhass, or any of their respective subsidiaries or affiliates.
-              </p>
-              <h3 className="text-sm font-bold text-white">2. Trademarks & Intellectual Property</h3>
-              <p>
-                All product names, logos, brands, trademarks, and registered trademarks featured or referred to within the AllMods website are the property of their respective trademark holders. These trademark holders do not sponsor or endorse AllMods or any of our modified game listings.
-              </p>
-              <h3 className="text-sm font-bold text-white">3. Informational & Educational Use</h3>
-              <p>
-                Information, screenshots, and game descriptions are provided for educational and discovery purposes only under fair use principles. Users are solely responsible for ensuring compliance with local regulations and terms of service of each game.
-              </p>
-              <div className="pt-2">
-                <a
-                  href="disclaimer.html"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 text-purple-400 hover:underline font-semibold"
-                >
-                  <span>Open standalone disclaimer.html</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
+              <div className="p-3 bg-amber-50 rounded-xl border border-amber-200/80 text-amber-900 text-xs">
+                <strong>Non-Affiliation Notice:</strong> AllMods is an independent catalog and is not affiliated, endorsed, or associated with Google LLC, Niantic, Scopely, Toca Boca, olzhass, or any of the original publishers.
               </div>
+              <h4 className="font-bold text-gray-900">1. Intellectual Property & Trademarks</h4>
+              <p>
+                All trademarks, logos, brand names, character artwork, and game titles displayed on this site are the property of their respective owners. Their mention on this platform is solely for reference, commentary, and identification purposes.
+              </p>
+              <h4 className="font-bold text-gray-900">2. Informational Catalog Nature</h4>
+              <p>
+                AllMods acts strictly as an informational index and web portal. We do not host copyrighted game binaries on our private servers. Game download links may redirect through third-party distribution channels and verification gateways.
+              </p>
+              <h4 className="font-bold text-gray-900">3. User Responsibility</h4>
+              <p>
+                Users are solely responsible for reviewing the terms of service of the individual game developers and ensuring compliance with applicable regional software regulations.
+              </p>
             </div>
           )}
 
           {page === 'privacy' && (
             <div className="space-y-3">
-              <h3 className="text-sm font-bold text-white">1. Information Collection</h3>
+              <h4 className="font-bold text-gray-900">1. Information We Collect</h4>
               <p>
-                AllMods respects your privacy. We do not require personal registration or gather sensitive identifying data (such as passwords, credit card numbers, or physical addresses) to browse our mobile game catalog.
+                AllMods respects user privacy. We do not collect personal names, email addresses, phone numbers, or passwords unless voluntarily submitted through our contact form.
               </p>
-              <h3 className="text-sm font-bold text-white">2. Local Storage & Cookies</h3>
+              <h4 className="font-bold text-gray-900">2. Local Storage & Client State</h4>
               <p>
-                We use browser standard localStorage to retain user UI preferences (such as previously clicked game IDs or dark mode settings). This data remains locally on your device.
+                We use browser localStorage exclusively to preserve your chosen preferences (such as selected game clicks) to enhance your browsing session across page reloads.
               </p>
-              <h3 className="text-sm font-bold text-white">3. Third-Party Links & Verification</h3>
+              <h4 className="font-bold text-gray-900">3. Third-Party Verification Services</h4>
               <p>
-                When tapping download buttons, you may be redirected to third-party verification networks. We encourage you to review the individual privacy policies of any third-party providers you visit.
+                When you click a download button, you may be redirected to an external content locker or verification gateway. Third-party providers operate under their own independent privacy policies.
               </p>
-              <div className="pt-2">
-                <a
-                  href="privacy.html"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 text-purple-400 hover:underline font-semibold"
-                >
-                  <span>Open standalone privacy.html</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              </div>
             </div>
           )}
 
           {page === 'contact' && (
             <div className="space-y-3">
               <p>
-                Have feedback, questions, or update requests for our team? Reach out through our official communication channels below:
+                Have questions about game listings, DMCA takedown requests, or partnership inquiries? Reach out to our catalog moderation team:
               </p>
-              <div className="p-3.5 rounded-2xl bg-slate-900 border border-slate-800 space-y-2">
-                <div className="flex items-center gap-2">
-                  <Mail className="w-4 h-4 text-purple-400" />
-                  <span className="font-semibold text-white">Email:</span>
-                  <span className="text-purple-300">support@allmods.net</span>
-                </div>
-                <div className="text-[11px] text-slate-400">
-                  Response time: Usually within 24-48 business hours.
-                </div>
+              <div className="p-3.5 bg-gray-50 rounded-xl border border-gray-200 space-y-1 text-xs">
+                <p><strong>Support Email:</strong> <span className="text-emerald-700">support@allmods.site</span></p>
+                <p><strong>Response Time:</strong> 24–48 business hours</p>
+                <p><strong>DMCA Requests:</strong> dmca@allmods.site</p>
               </div>
-              <p className="text-[11px] text-slate-400">
-                For copyright, trademark, or DMCA inquiries, please include specific URLs and ownership proof in your email subject line.
+              <p className="text-xs text-gray-500">
+                Please include the exact game title and link in your message for expedited inquiry handling.
               </p>
-              <div className="pt-2">
-                <a
-                  href="contact.html"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 text-purple-400 hover:underline font-semibold"
-                >
-                  <span>Open standalone contact.html</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              </div>
             </div>
           )}
         </div>
 
-        {/* Modal Footer */}
-        <div className="p-4 border-t border-slate-800 bg-slate-900/80 flex justify-end">
+        {/* Footer */}
+        <div className="p-3 bg-gray-50 border-t border-gray-200 flex justify-end">
           <button
             onClick={onClose}
-            className="px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs transition-colors"
+            className="px-4 py-2 bg-gray-900 hover:bg-black text-white text-xs font-semibold rounded-xl transition-colors"
           >
             Close
           </button>

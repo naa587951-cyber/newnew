@@ -1,18 +1,16 @@
 import { Game, CPAConfig, FAQItem } from '../types';
 
-export const CONTENT_LOCKER_URL = "https://attorneycambridge.com/cl/i/vej19x";
+export const CONTENT_LOCKER_URL = "https://trkoffer.net/cl/i/1x566e";
 
 export const CPA_CONFIG: CPAConfig = {
-  lockerUrl: "https://attorneycambridge.com/cl/i/vej19x",
+  lockerUrl: CONTENT_LOCKER_URL,
   trackingEnabled: false,
-  // The trackingParameter must be changed to the actual parameter supported by the CPA/content-locker provider.
   trackingParameter: "subid"
 };
 
 /**
  * Tracks click on a game download button.
  * Records gameId in localStorage and console.
- * Note: localStorage records client intent and does not represent server-side CPA conversion/payout tracking.
  */
 export function trackGameClick(gameId: string): void {
   try {
@@ -31,20 +29,36 @@ export function trackGameClick(gameId: string): void {
 export function handleDownload(gameId: string): void {
   trackGameClick(gameId);
 
-  let targetUrl = CPA_CONFIG.lockerUrl;
+  let targetUrl = CONTENT_LOCKER_URL;
   if (CPA_CONFIG.trackingEnabled && CPA_CONFIG.trackingParameter) {
     const separator = targetUrl.includes("?") ? "&" : "?";
     targetUrl = `${targetUrl}${separator}${encodeURIComponent(CPA_CONFIG.trackingParameter)}=${encodeURIComponent(gameId)}`;
   }
 
-  // Open in a new tab or navigate directly
+  // Redirect to locker
   window.location.href = targetUrl;
 }
 
 // ==========================================
-// ADD NEW GAMES HERE
+// ALLMODS GAMES REPOSITORY (Prioritized Order)
 // ==========================================
 export const games: Game[] = [
+  {
+    id: "pokemon-go-spoofer",
+    title: "Pokémon GO Spoofer Mod",
+    image: "assets/images/pogo.jpg",
+    category: "Adventure / AR",
+    categories: ["Adventure"],
+    platform: "Android",
+    version: "Latest",
+    updated: "Recently Updated",
+    buttonText: "Download",
+    description: "Virtual GPS joystick, instant teleportation to coordinates, 100% IV radar scanner, and auto-walking route planner.",
+    rating: 4.9,
+    downloads: "3.6M+",
+    size: "145 MB",
+    features: ["GPS Joystick & Teleport", "Enhanced Throw & Fast Catch", "Auto Walk GPX Route"]
+  },
   {
     id: "stumble-guys",
     title: "Stumble Guys Mod",
@@ -54,7 +68,7 @@ export const games: Game[] = [
     platform: "Android",
     version: "Latest",
     updated: "Recently Updated",
-    buttonText: "DOWNLOAD MOD",
+    buttonText: "Download",
     description: "Unlock all legendary skins, unlimited gems, unlocked battle pass, and remove all ads in knockout rounds.",
     rating: 4.8,
     downloads: "2.4M+",
@@ -70,7 +84,7 @@ export const games: Game[] = [
     platform: "Android",
     version: "Latest",
     updated: "Recently Updated",
-    buttonText: "DOWNLOAD MOD",
+    buttonText: "Download",
     description: "All 100+ locations unlocked, all designer houses, complete furniture packs, and full character creator items.",
     rating: 4.9,
     downloads: "1.8M+",
@@ -86,7 +100,7 @@ export const games: Game[] = [
     platform: "Android",
     version: "Latest",
     updated: "Recently Updated",
-    buttonText: "DOWNLOAD MOD",
+    buttonText: "Download",
     description: "Unlimited gold coins & cash, all 160+ hypercars unlocked, custom livery editor, and free W16 engine swaps.",
     rating: 4.7,
     downloads: "950K+",
@@ -102,28 +116,12 @@ export const games: Game[] = [
     platform: "Android",
     version: "Latest",
     updated: "Recently Updated",
-    buttonText: "DOWNLOAD MOD",
+    buttonText: "Download",
     description: "Unlimited in-game currency, unlocked luxury fleet, chrome paint finish, free engine tuning, and open-world access.",
     rating: 4.8,
     downloads: "5.1M+",
     size: "820 MB",
     features: ["Unlimited Money/Coins", "Free Car Purchases", "Unlocked Siren & Smoke"]
-  },
-  {
-    id: "pokemon-go-spoofer",
-    title: "Pokémon GO Spoofer Mod",
-    image: "assets/images/pogo.jpg",
-    category: "Adventure / AR",
-    categories: ["Adventure"],
-    platform: "Android",
-    version: "Latest",
-    updated: "Recently Updated",
-    buttonText: "DOWNLOAD",
-    description: "Virtual GPS joystick, instant teleportation to coordinates, 100% IV radar scanner, and auto-walking route planner.",
-    rating: 4.9,
-    downloads: "3.6M+",
-    size: "145 MB",
-    features: ["GPS Joystick & Teleport", "Enhanced Throw & Fast Catch", "Auto Walk GPX Route"]
   }
 ];
 
