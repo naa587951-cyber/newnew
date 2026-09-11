@@ -1,6 +1,6 @@
 {
   "name": "AllMods",
-  "description": "Professional Android APK and game mod marketplace for mobile devices.",
+  "description": "Professional games and mobile apps marketplace with verified mods and fast downloads.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

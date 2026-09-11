@@ -31,7 +31,8 @@ export const GameListItem: React.FC<GameListItemProps> = ({ game, onDownload, ba
   return (
     <div
       id={`list-item-${game.id}`}
-      className="bg-white border border-gray-200/90 rounded-xl p-3 flex items-center justify-between gap-3 shadow-[0_1px_3px_rgba(0,0,0,0.02)] hover:border-gray-300 transition-colors"
+      onClick={handleClick}
+      className="group bg-white border border-gray-200/90 rounded-xl p-3 flex items-center justify-between gap-3 shadow-[0_1px_3px_rgba(0,0,0,0.02)] hover:border-gray-300 hover:shadow-[0_3px_8px_rgba(0,0,0,0.04)] transition-all cursor-pointer select-none"
     >
       {/* Icon + Info */}
       <div className="flex items-center gap-3 min-w-0 flex-1">
@@ -42,13 +43,13 @@ export const GameListItem: React.FC<GameListItemProps> = ({ game, onDownload, ba
             onError={handleImageError}
             referrerPolicy="no-referrer"
             loading="lazy"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
           />
         </div>
 
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-1.5">
-            <h4 className="font-bold text-gray-900 text-sm truncate">
+            <h4 className="font-bold text-gray-900 text-sm truncate group-hover:text-emerald-700 transition-colors">
               {game.title}
             </h4>
             {badgeText && (
@@ -74,7 +75,10 @@ export const GameListItem: React.FC<GameListItemProps> = ({ game, onDownload, ba
       {/* Download Action */}
       <button
         id={`list-download-btn-${game.id}`}
-        onClick={handleClick}
+        onClick={(e) => {
+          e.stopPropagation();
+          handleClick();
+        }}
         disabled={isDownloading}
         className="shrink-0 px-3.5 py-2 rounded-xl bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white font-semibold text-xs border border-emerald-200/80 transition-all flex items-center gap-1.5 focus:outline-none active:scale-95"
       >

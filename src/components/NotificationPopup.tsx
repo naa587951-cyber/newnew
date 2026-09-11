@@ -51,21 +51,21 @@ export const NotificationPopup: React.FC = () => {
       id="top-notification-chip"
       role="status"
       aria-live="polite"
-      className={`w-full max-w-4xl mx-auto px-4 pt-3 pb-1 transition-opacity duration-300 ${
-        isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
+      className={`w-full max-w-4xl mx-auto px-4 pt-2.5 pb-1 transition-all duration-500 ease-out ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1 pointer-events-none'
       }`}
     >
       <div className="flex items-center justify-between gap-2.5 bg-white border border-gray-200/90 rounded-xl px-3 py-2 shadow-[0_1px_3px_rgba(0,0,0,0.03)] text-xs text-gray-700">
         {/* Left: Green indicator dot + Game icon + text */}
         <div className="flex items-center gap-2.5 min-w-0 flex-1">
-          {/* Green dot */}
+          {/* Green pulse dot */}
           <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0 animate-pulse" aria-hidden="true" />
 
           {/* Small game thumbnail */}
           <img
             src={currentNotification.gameImage}
             alt=""
-            className="w-5 h-5 rounded-md object-cover shrink-0 border border-gray-100"
+            className="w-5 h-5 rounded-md object-cover shrink-0 border border-gray-100 shadow-2xs"
             referrerPolicy="no-referrer"
             onError={(e) => {
               const target = e.currentTarget;
@@ -76,7 +76,7 @@ export const NotificationPopup: React.FC = () => {
           />
 
           {/* Text ticker */}
-          <div className="truncate">
+          <div className="truncate text-xs">
             <span className="font-semibold text-gray-900">{currentNotification.username}</span>
             <span className="text-gray-500 ml-1">just got</span>
             <span className="font-semibold text-emerald-700 ml-1">{currentNotification.gameTitle}</span>

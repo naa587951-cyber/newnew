@@ -39,8 +39,8 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="text-xl font-black tracking-tight text-gray-900 leading-none">
                 ALL<span className="text-emerald-600">MODS</span>
               </span>
-              <span className="text-[10px] font-medium tracking-wider text-gray-500 uppercase mt-0.5">
-                APK Marketplace
+              <span className="text-[10px] font-semibold tracking-wider text-gray-500 uppercase mt-0.5">
+                Games & Apps
               </span>
             </div>
           </button>
@@ -56,7 +56,7 @@ export const Header: React.FC<HeaderProps> = ({
                 type="text"
                 value={searchQuery}
                 onChange={(e) => onSearchChange(e.target.value)}
-                placeholder="Search for your game..."
+                placeholder="Search for your game"
                 className="w-full pl-10 pr-10 py-2.5 text-sm bg-gray-50 hover:bg-gray-100/80 focus:bg-white border border-gray-200 rounded-full text-gray-900 placeholder-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all"
               />
               {searchQuery && (
@@ -90,7 +90,7 @@ export const Header: React.FC<HeaderProps> = ({
               type="text"
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
-              placeholder="Search for your game..."
+              placeholder="Search for your game"
               className="w-full pl-10 pr-10 py-2 text-sm bg-gray-50 focus:bg-white border border-gray-200 rounded-full text-gray-900 placeholder-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all"
             />
             {searchQuery && (

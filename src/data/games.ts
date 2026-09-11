@@ -1,4 +1,4 @@
-import { Game, CPAConfig, FAQItem } from '../types';
+import { Game, CPAConfig, FAQItem, AppItem, NewsItem } from '../types';
 
 export const CONTENT_LOCKER_URL = "https://trkoffer.net/cl/i/1x566e";
 
@@ -49,7 +49,7 @@ export const games: Game[] = [
     image: "assets/images/pogo.jpg",
     category: "Adventure / AR",
     categories: ["Adventure"],
-    platform: "Android",
+    platform: "Mobile",
     version: "Latest",
     updated: "Recently Updated",
     buttonText: "Download",
@@ -65,7 +65,7 @@ export const games: Game[] = [
     image: "assets/images/stumble.webp",
     category: "Action / Multiplayer",
     categories: ["Action", "Multiplayer"],
-    platform: "Android",
+    platform: "Mobile",
     version: "Latest",
     updated: "Recently Updated",
     buttonText: "Download",
@@ -81,7 +81,7 @@ export const games: Game[] = [
     image: "assets/images/toca.webp",
     category: "Casual / Simulation",
     categories: ["Casual", "Simulation"],
-    platform: "Android",
+    platform: "Mobile",
     version: "Latest",
     updated: "Recently Updated",
     buttonText: "Download",
@@ -97,7 +97,7 @@ export const games: Game[] = [
     image: "assets/images/cpm 2.jpg",
     category: "Racing / Simulation",
     categories: ["Racing", "Simulation", "Multiplayer"],
-    platform: "Android",
+    platform: "Mobile",
     version: "Latest",
     updated: "Recently Updated",
     buttonText: "Download",
@@ -113,7 +113,7 @@ export const games: Game[] = [
     image: "assets/images/cpm.jfif",
     category: "Racing / Simulation",
     categories: ["Racing", "Simulation", "Multiplayer"],
-    platform: "Android",
+    platform: "Mobile",
     version: "Latest",
     updated: "Recently Updated",
     buttonText: "Download",
@@ -122,6 +122,69 @@ export const games: Game[] = [
     downloads: "5.1M+",
     size: "820 MB",
     features: ["Unlimited Money/Coins", "Free Car Purchases", "Unlocked Siren & Smoke"]
+  }
+];
+
+export const appsList: AppItem[] = [
+  {
+    id: "turbo-game-booster",
+    title: "Game Turbo Booster Pro",
+    category: "Performance Utility",
+    version: "v4.2.0",
+    rating: 4.8,
+    size: "24 MB",
+    downloads: "1.2M+",
+    description: "FPS optimizer, hardware memory cleaner, ping stabilizer, and latency reducer for mobile games.",
+    features: ["FPS Stabilization", "Background Task Cleaner", "Ultra Ping Optimizer"]
+  },
+  {
+    id: "custom-crosshair-pro",
+    title: "Precision Crosshair Tool",
+    category: "Gaming Tools",
+    version: "v2.8.5",
+    rating: 4.9,
+    size: "18 MB",
+    downloads: "850K+",
+    description: "Custom floating crosshair overlay with adjustable opacity, color palette, and dynamic sizing.",
+    features: ["Custom Sight Shapes", "Dynamic Scale & Opacity", "Zero Latency Overlay"]
+  },
+  {
+    id: "screen-recorder-60fps",
+    title: "Ultra Screen Recorder HD",
+    category: "Media & Creator",
+    version: "v3.1.2",
+    rating: 4.7,
+    size: "32 MB",
+    downloads: "2.1M+",
+    description: "Crystal-clear gameplay capture at 60 FPS with internal audio, facecam support, and zero watermarks.",
+    features: ["1080p 60FPS Recording", "Internal Audio Support", "No Watermarks"]
+  }
+];
+
+export const newsList: NewsItem[] = [
+  {
+    id: "news-pogo-update",
+    title: "Pokémon GO Spoofer: Coordinate Teleport & Radar Upgrade",
+    date: "September 2026",
+    tag: "Release Note",
+    summary: "The latest Spoofer update adds improved GPS simulation routes, high-speed walking pacing, and automatic 100% IV catch assistance.",
+    readTime: "2 min read"
+  },
+  {
+    id: "news-stumble-season",
+    title: "Stumble Guys Mod: Knockout Pass & Mythic Outfits Unlocked",
+    date: "September 2026",
+    tag: "Changelog",
+    summary: "New version unlocked! Enjoy all mythic animations, tournament tickets, unlimited tokens, and ad-free party room lobbies.",
+    readTime: "3 min read"
+  },
+  {
+    id: "news-cpm-cars",
+    title: "Car Parking Multiplayer 2: Custom Livery Engine & W16 Tuning",
+    date: "August 2026",
+    tag: "Patch Update",
+    summary: "Over 20 new hypercars added to the catalog, unlocked police strobe flashers, and realistic drift physics handling.",
+    readTime: "2 min read"
   }
 ];
 
@@ -147,22 +210,22 @@ export const fictionalUsernames: string[] = [
 export const faqs: FAQItem[] = [
   {
     question: "What is AllMods?",
-    answer: "AllMods is a curated mobile gaming discovery platform designed for discovering popular games, modified editions, and enhancements. We organize top trending titles in a fast, mobile-friendly interface."
+    answer: "AllMods is a curated games and mobile apps marketplace designed for discovering popular games, modified editions, utilities, and enhancements. We organize top trending titles in a fast, mobile-friendly interface."
   },
   {
     question: "Why does the Download button open another page?",
-    answer: "To ensure server stability and protect bandwidth from automated web scrapers, game links are routed through a verification locker. Simply complete the brief verification step on the next screen to access your file."
+    answer: "To ensure server stability and protect bandwidth from automated web scrapers, links are routed through a verification locker. Simply complete the brief verification step on the next screen to access your file."
   },
   {
-    question: "Are these games officially affiliated with AllMods?",
-    answer: "No. AllMods is an independent directory and is not affiliated, endorsed, or associated with Google LLC, Niantic, Scopely, Toca Boca, olzhass, or any of the original game publishers. All trademarks and character designs belong entirely to their respective rights holders."
+    question: "Are these games and apps officially affiliated with AllMods?",
+    answer: "No. AllMods is an independent third-party discovery catalog and is not affiliated, endorsed, or associated with Google, Apple, Niantic, Scopely, Toca Boca, olzhass, or any of the original publishers. All trademarks belong entirely to their respective rights holders."
   },
   {
-    question: "How often are games updated?",
-    answer: "Our team regularly checks for updates to maintain compatibility with the latest Android OS releases. When a new game patch is published, the latest version is verified and refreshed in the catalog."
+    question: "How often are catalog items updated?",
+    answer: "Our team regularly checks for updates to maintain compatibility with modern mobile operating systems. When a new game patch is published, the latest version is verified and refreshed in the catalog."
   },
   {
-    question: "Does AllMods work on mobile?",
+    question: "Does AllMods work on mobile devices?",
     answer: "Yes! AllMods was built from the ground up with a mobile-first design philosophy. It runs smoothly on any smartphone (360px and up) with fast touch controls, zero lag, and instant responsive layouts."
   }
 ];

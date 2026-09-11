@@ -42,3 +42,24 @@ export interface FAQItem {
   question: string;
   answer: string;
 }
+
+export interface AppItem {
+  id: string;
+  title: string;
+  category: string;
+  version: string;
+  rating: number;
+  size: string;
+  downloads: string;
+  description: string;
+  features: string[];
+}
+
+export interface NewsItem {
+  id: string;
+  title: string;
+  date: string;
+  tag: string;
+  summary: string;
+  readTime: string;
+}
