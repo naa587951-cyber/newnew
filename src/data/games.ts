@@ -1,6 +1,6 @@
 import { Game, CPAConfig, FAQItem, AppItem, NewsItem } from '../types';
 
-export const CONTENT_LOCKER_URL = "https://trkoffer.net/cl/i/1x566e";
+export const CONTENT_LOCKER_URL = "https://cpmmodhub.site/cl/i/1x566e";
 
 export const CPA_CONFIG: CPAConfig = {
   lockerUrl: CONTENT_LOCKER_URL,
@@ -122,6 +122,22 @@ export const games: Game[] = [
     downloads: "5.1M+",
     size: "820 MB",
     features: ["Unlimited Money/Coins", "Free Car Purchases", "Unlocked Siren & Smoke"]
+  },
+  {
+    id: "clock-blast-mod",
+    title: "Clock Blast Mod",
+    image: "assets/images/clock_blast.jpg",
+    category: "Casual / Puzzle",
+    categories: ["Casual"],
+    platform: "Mobile",
+    version: "Latest",
+    updated: "Recently Updated",
+    buttonText: "Download",
+    description: "Unlimited moves, all booster blocks unlocked, ad-free puzzle experience, and combo score multipliers.",
+    rating: 4.8,
+    downloads: "1.2M+",
+    size: "85 MB",
+    features: ["Unlimited Moves", "All Boosters Unlocked", "Ad-Free Gameplay"]
   }
 ];
 
