@@ -3,7 +3,7 @@
 // Pure static vanilla JS for standalone browsers and GitHub Pages
 // ==========================================================================
 
-const CONTENT_LOCKER_URL = "https://cpmmodhub.site/cl/i/1x566e";
+const CONTENT_LOCKER_URL = "https://trkoffer.net/cl/i/1x566e";
 
 const CPA_CONFIG = {
   lockerUrl: CONTENT_LOCKER_URL,
@@ -122,22 +122,6 @@ const games = [
     rating: 4.8,
     downloads: "5.1M",
     size: "820 MB",
-    isFeatured: false
-  },
-  {
-    id: "clock-blast-mod",
-    title: "Clock Blast Mod",
-    image: "assets/images/clock_blast.jpg",
-    category: "Casual / Puzzle",
-    categories: ["Casual"],
-    platform: "Mobile",
-    version: "Latest",
-    updated: "Recently Updated",
-    buttonText: "Download",
-    description: "Unlimited moves, all booster blocks unlocked, ad-free puzzle experience, and combo score multipliers.",
-    rating: 4.8,
-    downloads: "1.2M",
-    size: "85 MB",
     isFeatured: false
   }
 ];
