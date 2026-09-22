@@ -2,6 +2,16 @@ import { Game, CPAConfig, FAQItem, AppItem, NewsItem } from '../types';
 
 export const CONTENT_LOCKER_URL = "https://allmods.top/cl/i/1x566e";
 
+export const GAME_LOCKER_URLS: Record<string, string> = {
+  "pokemon-go-spoofer": "https://allmods.top/cl/i/1x566e",
+  "toca-boca": "https://allmods.top/cl/i/qn12ow",
+  "car-parking-multiplayer": "https://allmods.top/cl/i/4o2dvj",
+  "car-parking-multiplayer-2": "https://allmods.top/cl/i/m5nkv4",
+  "clock-blast": "https://allmods.top/cl/i/34jdwm",
+  "block-blast": "https://allmods.top/cl/i/34jdwm",
+  "stumble-guys": "https://allmods.top/cl/i/vej19x"
+};
+
 export const CPA_CONFIG: CPAConfig = {
   lockerUrl: CONTENT_LOCKER_URL,
   trackingEnabled: false,
@@ -24,12 +34,13 @@ export function trackGameClick(gameId: string): void {
 
 /**
  * Central download handler for all game cards.
- * Records click and redirects to the content locker URL.
+ * Records click and redirects to the specific content locker URL for each game.
  */
 export function handleDownload(gameId: string): void {
   trackGameClick(gameId);
 
-  let targetUrl = CONTENT_LOCKER_URL;
+  const lockerUrl = GAME_LOCKER_URLS[gameId] || games.find(g => g.id === gameId)?.downloadUrl || CONTENT_LOCKER_URL;
+  let targetUrl = lockerUrl;
   if (CPA_CONFIG.trackingEnabled && CPA_CONFIG.trackingParameter) {
     const separator = targetUrl.includes("?") ? "&" : "?";
     targetUrl = `${targetUrl}${separator}${encodeURIComponent(CPA_CONFIG.trackingParameter)}=${encodeURIComponent(gameId)}`;
@@ -57,7 +68,8 @@ export const games: Game[] = [
     rating: 4.9,
     downloads: "3.6M+",
     size: "145 MB",
-    features: ["GPS Joystick & Teleport", "Enhanced Throw & Fast Catch", "Auto Walk GPX Route"]
+    features: ["GPS Joystick & Teleport", "Enhanced Throw & Fast Catch", "Auto Walk GPX Route"],
+    downloadUrl: "https://allmods.top/cl/i/1x566e"
   },
   {
     id: "stumble-guys",
@@ -73,7 +85,8 @@ export const games: Game[] = [
     rating: 4.8,
     downloads: "2.4M+",
     size: "165 MB",
-    features: ["All Skins Unlocked", "Unlimited Gems & Tokens", "Ad-Free Experience"]
+    features: ["All Skins Unlocked", "Unlimited Gems & Tokens", "Ad-Free Experience"],
+    downloadUrl: "https://allmods.top/cl/i/vej19x"
   },
   {
     id: "clock-blast",
@@ -89,7 +102,8 @@ export const games: Game[] = [
     rating: 4.9,
     downloads: "1.5M+",
     size: "85 MB",
-    features: ["Unlimited Coins & Boosters", "All Levels Unlocked", "Ad-Free Experience"]
+    features: ["Unlimited Coins & Boosters", "All Levels Unlocked", "Ad-Free Experience"],
+    downloadUrl: "https://allmods.top/cl/i/34jdwm"
   },
   {
     id: "toca-boca",
@@ -105,7 +119,8 @@ export const games: Game[] = [
     rating: 4.9,
     downloads: "1.8M+",
     size: "540 MB",
-    features: ["All Locations Unlocked", "All Furniture Packs", "Speed Acceleration"]
+    features: ["All Locations Unlocked", "All Furniture Packs", "Speed Acceleration"],
+    downloadUrl: "https://allmods.top/cl/i/qn12ow"
   },
   {
     id: "car-parking-multiplayer-2",
@@ -121,7 +136,8 @@ export const games: Game[] = [
     rating: 4.7,
     downloads: "950K+",
     size: "980 MB",
-    features: ["Unlimited Money & Gold", "All 160+ Cars Free", "Unlocked Police Light"]
+    features: ["Unlimited Money & Gold", "All 160+ Cars Free", "Unlocked Police Light"],
+    downloadUrl: "https://allmods.top/cl/i/m5nkv4"
   },
   {
     id: "car-parking-multiplayer",
@@ -137,7 +153,8 @@ export const games: Game[] = [
     rating: 4.8,
     downloads: "5.1M+",
     size: "820 MB",
-    features: ["Unlimited Money/Coins", "Free Car Purchases", "Unlocked Siren & Smoke"]
+    features: ["Unlimited Money/Coins", "Free Car Purchases", "Unlocked Siren & Smoke"],
+    downloadUrl: "https://allmods.top/cl/i/4o2dvj"
   }
 ];
 

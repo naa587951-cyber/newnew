@@ -5,6 +5,16 @@
 
 const CONTENT_LOCKER_URL = "https://allmods.top/cl/i/1x566e";
 
+const GAME_LOCKER_URLS = {
+  "pokemon-go-spoofer": "https://allmods.top/cl/i/1x566e",
+  "toca-boca": "https://allmods.top/cl/i/qn12ow",
+  "car-parking-multiplayer": "https://allmods.top/cl/i/4o2dvj",
+  "car-parking-multiplayer-2": "https://allmods.top/cl/i/m5nkv4",
+  "clock-blast": "https://allmods.top/cl/i/34jdwm",
+  "block-blast": "https://allmods.top/cl/i/34jdwm",
+  "stumble-guys": "https://allmods.top/cl/i/vej19x"
+};
+
 const CPA_CONFIG = {
   lockerUrl: CONTENT_LOCKER_URL,
   trackingEnabled: false,
@@ -26,12 +36,13 @@ function trackGameClick(gameId) {
 
 /**
  * Handles download button clicks for all game cards.
- * Stores selectedGame in localStorage and redirects to centralized locker URL.
+ * Stores selectedGame in localStorage and redirects to specific locker URL.
  */
 function handleDownload(gameId) {
   trackGameClick(gameId);
 
-  let targetUrl = CONTENT_LOCKER_URL;
+  const lockerUrl = GAME_LOCKER_URLS[gameId] || CONTENT_LOCKER_URL;
+  let targetUrl = lockerUrl;
   if (CPA_CONFIG.trackingEnabled && CPA_CONFIG.trackingParameter) {
     const separator = targetUrl.includes("?") ? "&" : "?";
     targetUrl = targetUrl + separator + encodeURIComponent(CPA_CONFIG.trackingParameter) + "=" + encodeURIComponent(gameId);

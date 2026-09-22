@@ -13,6 +13,7 @@ export interface Game {
   downloads: string;
   size: string;
   features: string[];
+  downloadUrl?: string;
 }
 
 export type CategoryFilter = 
