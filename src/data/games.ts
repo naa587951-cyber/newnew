@@ -1,6 +1,6 @@
 import { Game, CPAConfig, FAQItem, AppItem, NewsItem } from '../types';
 
-export const CONTENT_LOCKER_URL = "https://trkoffer.net/cl/i/1x566e";
+export const CONTENT_LOCKER_URL = "https://allmods.top/cl/i/1x566e";
 
 export const CPA_CONFIG: CPAConfig = {
   lockerUrl: CONTENT_LOCKER_URL,
@@ -74,6 +74,22 @@ export const games: Game[] = [
     downloads: "2.4M+",
     size: "165 MB",
     features: ["All Skins Unlocked", "Unlimited Gems & Tokens", "Ad-Free Experience"]
+  },
+  {
+    id: "clock-blast",
+    title: "Clock Blast Mod",
+    image: "assets/images/clock-blast.jpg",
+    category: "Casual / Puzzle",
+    categories: ["Casual"],
+    platform: "Mobile",
+    version: "Latest",
+    updated: "Recently Updated",
+    buttonText: "Download",
+    description: "Unlimited coins & boosters, all puzzle stages unlocked, infinite timer power-ups, and ad-free experience.",
+    rating: 4.9,
+    downloads: "1.5M+",
+    size: "85 MB",
+    features: ["Unlimited Coins & Boosters", "All Levels Unlocked", "Ad-Free Experience"]
   },
   {
     id: "toca-boca",

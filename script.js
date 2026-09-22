@@ -3,7 +3,7 @@
 // Pure static vanilla JS for standalone browsers and GitHub Pages
 // ==========================================================================
 
-const CONTENT_LOCKER_URL = "https://trkoffer.net/cl/i/1x566e";
+const CONTENT_LOCKER_URL = "https://allmods.top/cl/i/1x566e";
 
 const CPA_CONFIG = {
   lockerUrl: CONTENT_LOCKER_URL,
@@ -74,6 +74,22 @@ const games = [
     rating: 4.8,
     downloads: "2.4M",
     size: "165 MB",
+    isFeatured: false
+  },
+  {
+    id: "clock-blast",
+    title: "Clock Blast Mod",
+    image: "assets/images/clock-blast.jpg",
+    category: "Casual / Puzzle",
+    categories: ["Casual"],
+    platform: "Mobile",
+    version: "Latest",
+    updated: "Recently Updated",
+    buttonText: "Download",
+    description: "Unlimited coins & boosters, all puzzle stages unlocked, infinite timer power-ups, and ad-free experience.",
+    rating: 4.9,
+    downloads: "1.5M",
+    size: "85 MB",
     isFeatured: false
   },
   {
